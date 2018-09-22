@@ -2,8 +2,19 @@ package main
 
 import (
 	"github.com/nishchayp/sudo-titans/app"
+	"github.com/nishchayp/sudo-titans/view"
 )
 
 func main() {
-	app.Run()
+	finish := make(chan bool)
+
+	go func() {
+		app.Run()
+	}()
+
+	go func() {
+		view.Run()
+	}()
+
+	<-finish
 }

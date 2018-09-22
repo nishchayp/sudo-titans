@@ -9,6 +9,15 @@ import (
 ** contains all structs used in the app
  */
 
+const (
+	MaxCTFEasy   = 100
+	DecCTFEasy   = 10
+	MaxCTFMedium = 150
+	DecCTFMedium = 15
+	MaxCTFHard   = 200
+	DecCTFHard   = 20
+)
+
 type Database struct {
 	db *gorm.DB
 }

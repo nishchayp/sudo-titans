@@ -23,60 +23,62 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	w.Write(json)
 }
 
-func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func SubmitFlag(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	if r.Method != "POST" {
 		return
 	}
 
-	type Receive struct {
-		TeamName string `json:"team_name"`
-		Password string `json:"password"`
-	}
-
 	var response Response
 
-	var user User
+	if IsLoggedIn(w, r) != true {
 
-	decoder := json.NewDecoder(r.Body)
-	var receive Receive
-	err := decoder.Decode(&receive)
-	if err != nil {
-		panic(err)
-	}
-
-	// check for teamName
-	if DB.db.Where("team_name = ?", receive.TeamName).First(&user).RecordNotFound() {
-
-		//json for incorrect teamName or pw
 		response = Response{
 			false,
-			"Incorrect team name or password",
+			"User not logged in",
 		}
 
 	} else {
 
-		DB.db.Where("team_name = ?", receive.TeamName).First(&user)
-		if user.Password != receive.Password {
-			//json for incorrect teamName or pw
+		type Receive struct {
+			QuestionID    string `json:"question_id"`
+			CandidateFlag string `json:"candidate_flag"`
+		}
+
+		var flag Flag
+
+		decoder := json.NewDecoder(r.Body)
+		var receive Receive
+		err := decoder.Decode(&receive)
+		if err != nil {
+			panic(err)
+		}
+
+		if DB.db.Where("question_id = ?", receive.QuestionID).First(&flag).RecordNotFound() {
+
 			response = Response{
 				false,
-				"Incorrect team name or password",
+				"QuestionId does not exist",
 			}
+
 		} else {
 
-			stUserCookie := &STUserCookie{
-				UID:      user.UserID,
-				TeamName: user.TeamName,
+			DB.db.Where("question_id = ?", receive.QuestionID).First(&flag)
+			if receive.CandidateFlag == flag.Flag {
+
+				response = Response{
+					true,
+					"Correct answer, flag found",
+				}
+
+			} else {
+
+				response = Response{
+					false,
+					"Wrong answer, flag not found",
+				}
+
 			}
-
-			SetCookieHandler(stUserCookie, w)
-
-			response = Response{
-				true,
-				"User logged in",
-			}
-
 		}
 
 	}
@@ -89,13 +91,56 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(json)
+
 }
 
-func Logout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func Mcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-	// clears cookie logs out user
+	var response Response
 
-	ClearCookieHandler(w)
-	http.Redirect(w, r, "/", 302)
+	if IsLoggedIn(w, r) != true {
+
+		response = Response{
+			false,
+			"User not logged in",
+		}
+
+	} else {
+
+		var mcqDetail McqDetail
+
+		if DB.db.Where("question_id = ?", "MCQ_"+ps.ByName("idx")).First(&mcqDetail).RecordNotFound() {
+
+			response = Response{
+				false,
+				"QuestionId does not exist",
+			}
+
+		} else {
+
+			DB.db.Where("question_id = ?", "MCQ_"+ps.ByName("idx")).First(&mcqDetail)
+
+			json, err := json.Marshal(mcqDetail)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			w.Header().Set("Content-Type", "application/json")
+			w.Write(json)
+
+			return
+
+		}
+	}
+
+	json, err := json.Marshal(response)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(json)
 
 }

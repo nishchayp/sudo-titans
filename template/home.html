@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sudo Titans|Home</title>
+</head>
+<body>
+	<h3>Home</h3>
+	<ul>
+	{{ range $value :=  . }}
+		<li><a href="/mcq/{{ $value }}"> Set {{ $value }}</a></li>
+	{{ end }}
+	</ul>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sudo Titans</title>
+</head>
+<body>
+	<h2>Sudo Titans</h2>
+	<form action="/login" method="post">
+	  <div class="container">
+		<label for="team_name"><b>Team Name</b></label>
+		<input type="text" placeholder="Enter Username" name="team_name" required>
+
+		<label for="password"><b>Password</b></label>
+		<input type="password" placeholder="Enter Password" name="password" required>
+
+		<button type="submit">Login</button>
+	  </div>
+	  <dir>
+	  	<h5>{{.}}</h5>
+	  </dir>
+	</form>
+</body>
+</html>

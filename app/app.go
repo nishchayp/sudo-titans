@@ -22,14 +22,22 @@ func Run() {
 
 	DB.db.AutoMigrate(&User{})
 	DB.db.AutoMigrate(&Admin{})
+	DB.db.AutoMigrate(&Flag{})
+	DB.db.AutoMigrate(&PointsAndAccess{})
+	DB.db.AutoMigrate(&PresentCTFValue{})
+	DB.db.AutoMigrate(&McqDetail{})
 
 	router := httprouter.New()
 
-	router.GET("/", Index)
-	router.POST("/login", Login)
-	router.GET("/logout", Logout)
+	router.GET("/api/", Index)
+	router.POST("/api/login", Login)
+	router.GET("/api/logout", Logout)
+	router.GET("/api/mcq/:idx", Mcq)
+	router.POST("/api/submitFlag", SubmitFlag)
 
-	router.GET("/admin", AdminIndex)
+	router.GET("/api/admin", AdminIndex)
+	router.GET("/api/admin/setPresentCTFValues", SetPresentCTFValues)
+	router.POST("/api/admin/addUser", AddUser)
 
 	log.Println("Server listening at port 8080")
 	log.Fatal(http.ListenAndServe(":8080", router))
