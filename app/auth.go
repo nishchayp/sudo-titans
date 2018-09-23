@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func ApiLogin(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	if r.Method != "POST" {
 		return
@@ -17,7 +17,15 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		Password string `json:"password"`
 	}
 
-	var response Response
+	// var response Response
+	type ResponseLogin struct {
+		Success  bool   `json:"success"`
+		Message  string `json:"message"`
+		UID      uint   `json: "uid"`
+		TeamName string `json:"team_name"`
+	}
+
+	var responseLogin ResponseLogin
 
 	var user User
 
@@ -32,9 +40,11 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	if DB.db.Where("team_name = ?", receive.TeamName).First(&user).RecordNotFound() {
 
 		//json for incorrect teamName or pw
-		response = Response{
+		responseLogin = ResponseLogin{
 			false,
 			"Incorrect team name or password",
+			999999,
+			"",
 		}
 
 	} else {
@@ -42,9 +52,11 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		DB.db.Where("team_name = ?", receive.TeamName).First(&user)
 		if user.Password != receive.Password {
 			//json for incorrect teamName or pw
-			response = Response{
+			responseLogin = ResponseLogin{
 				false,
 				"Incorrect team name or password",
+				999999,
+				"",
 			}
 		} else {
 
@@ -55,16 +67,18 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 			SetCookieHandler(stUserCookie, w)
 
-			response = Response{
+			responseLogin = ResponseLogin{
 				true,
 				"User logged in",
+				user.UserID,
+				user.TeamName,
 			}
 
 		}
 
 	}
 
-	json, err := json.Marshal(response)
+	json, err := json.Marshal(responseLogin)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -74,7 +88,7 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	w.Write(json)
 }
 
-func Logout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func ApiLogout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	// clears cookie logs out user
 
