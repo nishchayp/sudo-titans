@@ -10,12 +10,19 @@ import (
  */
 
 const (
-	MaxCTFEasy   = 100
-	DecCTFEasy   = 10
+	MCQEasy    = 50
+	MaxCTFEasy = 100
+	DecCTFEasy = 10
+
+	MCQMedium    = 75
 	MaxCTFMedium = 150
 	DecCTFMedium = 15
-	MaxCTFHard   = 200
-	DecCTFHard   = 20
+
+	MCQHard    = 75
+	MaxCTFHard = 200
+	DecCTFHard = 20
+
+	DecMCQ = 10
 )
 
 type Database struct {
