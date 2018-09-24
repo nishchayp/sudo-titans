@@ -21,6 +21,8 @@ const (
 	MCQHard    = 75
 	MaxCTFHard = 200
 	DecCTFHard = 20
+
+	DecMCQ = 10
 )
 
 type Database struct {

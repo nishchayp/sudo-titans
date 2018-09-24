@@ -7,6 +7,10 @@ package app
 // 	"strings"
 // )
 
-func EditScoreMcq(teamName string, questionID string) {
+func EditScoreMcq(isCorrect bool, teamName string, questionID string, level int) {
+
+}
+
+func EditScoreCtf(isCorrect bool, teamName string, questionID string, level int) {
 
 }

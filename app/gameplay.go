@@ -3,6 +3,7 @@ package app
 import (
 	"github.com/julienschmidt/httprouter"
 	"html/template"
+	// "log"
 	"net/http"
 	"strings"
 )
@@ -80,6 +81,7 @@ func Mcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		type Data struct {
 			QuestionID string
+			Level      int // 1-->Easy, 2-->Medium, 2-->Hard
 			Question_1 string
 			Option_1A  string
 			Option_1B  string
@@ -117,6 +119,7 @@ func Mcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 			data := Data{
 				QuestionID: mcqDetail.QuestionID,
+				Level:      mcqDetail.Level,
 				Question_1: mcqDetail.Question_1,
 				Option_1A:  mcqDetail.Option_1A,
 				Option_1B:  mcqDetail.Option_1B,
@@ -171,10 +174,15 @@ func CheckFlagMcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 
 		} else {
 
+			// read cookie to get team name to pass it in EditScoreFunction
+			stUserCookie := ReadCookieHandler(w, r)
+
 			var mcqDetail McqDetail
+			DB.db.Where("question_id = ?", ps.ByName("question_id")).First(&mcqDetail)
 
 			type Data struct {
 				QuestionID string
+				Level      int // 1-->Easy, 2-->Medium, 2-->Hard
 				Question_1 string
 				Option_1A  string
 				Option_1B  string
@@ -201,90 +209,153 @@ func CheckFlagMcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 				Result_4   int
 			}
 
-			var data Data
+			data := Data{
+				QuestionID: mcqDetail.QuestionID,
+				Level:      mcqDetail.Level,
+				Question_1: mcqDetail.Question_1,
+				Option_1A:  mcqDetail.Option_1A,
+				Option_1B:  mcqDetail.Option_1B,
+				Option_1C:  mcqDetail.Option_1C,
+				Option_1D:  mcqDetail.Option_1D,
+				Question_2: mcqDetail.Question_2,
+				Option_2A:  mcqDetail.Option_2A,
+				Option_2B:  mcqDetail.Option_2B,
+				Option_2C:  mcqDetail.Option_2C,
+				Option_2D:  mcqDetail.Option_2D,
+				Question_3: mcqDetail.Question_3,
+				Option_3A:  mcqDetail.Option_3A,
+				Option_3B:  mcqDetail.Option_3B,
+				Option_3C:  mcqDetail.Option_3C,
+				Option_3D:  mcqDetail.Option_3D,
+				Question_4: mcqDetail.Question_4,
+				Option_4A:  mcqDetail.Option_4A,
+				Option_4B:  mcqDetail.Option_4B,
+				Option_4C:  mcqDetail.Option_4C,
+				Option_4D:  mcqDetail.Option_4D,
+				Result_1:   0,
+				Result_2:   0,
+				Result_3:   0,
+				Result_4:   0,
+			}
 
 			DB.db.Where("question_id = ?", ps.ByName("question_id")).First(&flag)
 
 			count := 0
-			var (
-				res1 int
-				res2 int
-				res3 int
-				res4 int
-			)
 
 			if formData[0] == flag.Flag[0] {
-				res1 = 1
+				data.Result_1 = 1
 				count++
 			} else {
-				res1 = -1
+				data.Result_1 = -1
 			}
 
 			if formData[1] == flag.Flag[1] {
-				res2 = 1
+				data.Result_2 = 1
 				count++
 			} else {
-				res2 = -1
+				data.Result_2 = -1
 			}
 
 			if formData[2] == flag.Flag[2] {
-				res3 = 1
+				data.Result_3 = 1
 				count++
 			} else {
-				res3 = -1
+				data.Result_3 = -1
 			}
 
 			if formData[3] == flag.Flag[3] {
-				res4 = 1
+				data.Result_4 = 1
 				count++
 			} else {
-				res4 = -1
+				data.Result_4 = -1
 			}
 
 			if count < 4 {
-				DB.db.Where("question_id = ?", ps.ByName("question_id")).First(&mcqDetail)
-				data = Data{
-					QuestionID: mcqDetail.QuestionID,
-					Question_1: mcqDetail.Question_1,
-					Option_1A:  mcqDetail.Option_1A,
-					Option_1B:  mcqDetail.Option_1B,
-					Option_1C:  mcqDetail.Option_1C,
-					Option_1D:  mcqDetail.Option_1D,
-					Question_2: mcqDetail.Question_2,
-					Option_2A:  mcqDetail.Option_2A,
-					Option_2B:  mcqDetail.Option_2B,
-					Option_2C:  mcqDetail.Option_2C,
-					Option_2D:  mcqDetail.Option_2D,
-					Question_3: mcqDetail.Question_3,
-					Option_3A:  mcqDetail.Option_3A,
-					Option_3B:  mcqDetail.Option_3B,
-					Option_3C:  mcqDetail.Option_3C,
-					Option_3D:  mcqDetail.Option_3D,
-					Question_4: mcqDetail.Question_4,
-					Option_4A:  mcqDetail.Option_4A,
-					Option_4B:  mcqDetail.Option_4B,
-					Option_4C:  mcqDetail.Option_4C,
-					Option_4D:  mcqDetail.Option_4D,
-					Result_1:   res1,
-					Result_2:   res2,
-					Result_3:   res3,
-					Result_4:   res4,
-				}
 
-				// read cookie to get team name to pass it in EditScoreFunction
-
-				stUserCookie := ReadCookieHandler(w, r)
-
-				EditScoreMcq(stUserCookie.TeamName, ps.ByName("question_id"))
+				EditScoreMcq(false, stUserCookie.TeamName, data.QuestionID, data.Level)
 
 				t := template.Must(template.ParseFiles("template/preliminaryMcq.html"))
 				t.Execute(w, data)
 			} else {
 
+				EditScoreMcq(true, stUserCookie.TeamName, data.QuestionID, data.Level)
+
+				var ctfDetail CtfDetail
+				DB.db.Where("question_id = ?", strings.Replace(ps.ByName("question_id"), "MCQ", "CTF", -1)).First(&ctfDetail)
+
 				t := template.Must(template.ParseFiles("template/finalCtf.html"))
-				t.Execute(w, "hello")
+				t.Execute(w, ctfDetail)
 			}
 
 		}
 	}
+}
+
+func CheckFlagCtf(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+
+	if IsLoggedIn(w, r) != true {
+
+		t := template.Must(template.ParseFiles("template/error.html"))
+		t.Execute(w, "User not logged in")
+
+	} else {
+
+		r.ParseForm()
+		formData := strings.Join(r.Form["flag"], "")
+
+		var flag Flag
+
+		if DB.db.Where("question_id = ?", ps.ByName("question_id")).First(&flag).RecordNotFound() {
+
+			t := template.Must(template.ParseFiles("template/error.html"))
+			t.Execute(w, "QuestionId does not exist")
+
+		} else {
+
+			// read cookie to get team name to pass it in EditScoreFunction
+			stUserCookie := ReadCookieHandler(w, r)
+
+			var ctfDetail CtfDetail
+			DB.db.Where("question_id = ?", ps.ByName("question_id")).First(&ctfDetail)
+			type Data struct {
+				CtfDetailID uint
+				QuestionID  string
+				Level       int
+				Question    string
+				Hint        string
+				Result      int
+			}
+			data := Data{
+				CtfDetailID: ctfDetail.CtfDetailID,
+				QuestionID:  ctfDetail.QuestionID,
+				Level:       ctfDetail.Level,
+				Question:    ctfDetail.Question,
+				Hint:        ctfDetail.Hint,
+				Result:      0,
+			}
+
+			DB.db.Where("question_id = ?", ps.ByName("question_id")).First(&flag)
+
+			if formData == flag.Flag {
+				EditScoreCtf(true, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
+				t := template.Must(template.ParseFiles("template/scoreBoard.html"))
+				t.Execute(w, "Correct answer!")
+			} else {
+				data.Result = -1
+				EditScoreCtf(false, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
+				t := template.Must(template.ParseFiles("template/finalCtf.html"))
+				t.Execute(w, data)
+			}
+
+		}
+
+	}
+}
+
+func Scoreboard(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	// var pointsAndAccess PointsAndAccess
+	// DB.db.Limit(8).Order("total_points").Find(&pointsAndAccess)
+	// for _, row := range pointsAndAccess {
+	// 	log.Println(row.TeamName)
+	// }
 }

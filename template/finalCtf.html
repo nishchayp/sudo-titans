@@ -2,8 +2,23 @@
 <html>
 <head>
 	<title>Sudo Titans|Final CTF</title>
+	<link rel="stylesheet" type="text/css" href="/assets/css/indexStyle.css">
 </head>
 <body>
-	<h3>{{ . }}</h3>
+	<h3>CTF Question</h3>
+	<h4>{{ .Question }}</h4>
+	<p>{{ .Hint }}</p>
+	<a href="/ctfQuestion/{{ .QuestionID }}/ctf.html" target="_blank">Open CTF</a>
+	<div>
+		<form action="/submitFlag/ctf/{{ .QuestionID }}" method="post">
+		  <div class="container">
+			<label for="flag"><b>st_flag_is_</b></label>
+			<input type="text" placeholder="Enter Flag" name="flag" required>
+
+			<button type="submit">Submit</button>
+		  </div>
+		</form>
+	</div>
+	<h5>{{ .Result }}</h5>
 </body>
 </html>
