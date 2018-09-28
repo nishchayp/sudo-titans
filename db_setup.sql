@@ -1,7 +1,13 @@
+-- call admin route to initialize present ctf values
+-- add records in PointsAndAccess and TotalPoints for all teams
+
 -- create admin
 insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("admin", "adminPassword", "nish", "lennon", "160905298", "160905299");
 insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("t1", "t1Password", "nish1", "lennon1", "1609052981", "1609052991");
 insert into admins(team_name) values("admin");
+
+-- create entries in PointsAndAccess
+insert into points_and_accesses(team_name) values("t1");
 
 -- add mcq questions
 insert into mcq_details values(

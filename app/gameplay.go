@@ -3,7 +3,7 @@ package app
 import (
 	"github.com/julienschmidt/httprouter"
 	"html/template"
-	// "log"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -324,6 +324,7 @@ func CheckFlagCtf(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 				Question    string
 				Hint        string
 				Result      int
+				Message     string
 			}
 			data := Data{
 				CtfDetailID: ctfDetail.CtfDetailID,
@@ -336,15 +337,37 @@ func CheckFlagCtf(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 
 			DB.db.Where("question_id = ?", ps.ByName("question_id")).First(&flag)
 
+			// func EditScoreCtf
+			// return values
+			//  1-->Correct
+			//  0-->Already answered
+			// -1-->Wrong
+			// -2-->Not accesible
+
 			if formData == flag.Flag {
-				EditScoreCtf(true, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
-				t := template.Must(template.ParseFiles("template/scoreBoard.html"))
-				t.Execute(w, "Correct answer!")
+				data.Result = EditScoreCtf(true, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
 			} else {
-				data.Result = -1
-				EditScoreCtf(false, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
+				data.Result = EditScoreCtf(false, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
+			}
+
+			if data.Result == 1 {
+				data.Message = "Correct answer!"
+				t := template.Must(template.ParseFiles("template/scoreBoard.html"))
+				t.Execute(w, data.Message)
+			} else if data.Result == 0 {
+				data.Message = "You have already answered this question correctly"
+				t := template.Must(template.ParseFiles("template/scoreBoard.html"))
+				t.Execute(w, data.Message)
+			} else if data.Result == -1 {
+				data.Message = "Wrong answer!"
 				t := template.Must(template.ParseFiles("template/finalCtf.html"))
 				t.Execute(w, data)
+			} else if data.Result == -2 {
+				data.Message = "Question not unlocked, answer the preliminary MCQs to unlock this question"
+				t := template.Must(template.ParseFiles("template/finalCtf.html"))
+				t.Execute(w, data)
+			} else {
+				log.Println(stUserCookie.TeamName + ": Invalid data.result value returned from EditScoreCtf")
 			}
 
 		}
