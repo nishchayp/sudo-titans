@@ -1,24 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Sudo Titans|Final CTF</title>
-	<link rel="stylesheet" type="text/css" href="/assets/css/indexStyle.css">
+	<title>Sudo Titans</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/assets/index/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/assets/index/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/assets/preliminaryMcq/css/main.css">
+<!--===============================================================================================-->
 </head>
 <body>
-	<h3>CTF Question</h3>
+<div class="jumbotron">
+   <div class="jumbo-container">
+      <h1>Sudo Titans</h1>
+   </div>
+   <p>Answer the given Multiple Choice Question correctly to unlock the final Capture the Flag question of this set. The flag is the lower case string without any spaces containing the correct options in order. Can't get any easier, right? Well it can every attempt gives back the result on which questions you got wrong but remeber each wrong answer incurs a penalty of 10pts.</p>
+</div>
+
+<div class="question-card ctf-card">
 	<h4>{{ .Question }}</h4>
 	<p>{{ .Hint }}</p>
-	<a href="/ctfQuestion/{{ .QuestionID }}/ctf.html" target="_blank">Open CTF</a>
-	<div>
-		<form action="/submitFlag/ctf/{{ .QuestionID }}" method="post">
-		  <div class="container">
-			<label for="flag"><b>st_flag_is_</b></label>
-			<input type="text" placeholder="Enter Flag" name="flag" required>
+	<a href="/ctfQuestion/{{ .QuestionID }}/ctf.html" target="_blank" class="ctf-link">Open CTF</a>
+</div>
 
-			<button type="submit">Submit</button>
-		  </div>
-		</form>
-	</div>
-	<h5>{{ .Result }}</h5>
+<div class="container-flag-submit">
+<div class="wrap-login100">
+	<form class="login100-form validate-form" action="/submitFlag/ctf/{{ .QuestionID }}" method="post">
+		<span class="login100-form-title p-b-26">
+			Submit Flag
+		</span>
+		<div class="wrap-input100 validate-input">
+			<input class="input100" type="text" name="flag">
+			<span class="focus-input100" data-placeholder="Flag"></span>
+		</div>
+
+		<div class="container-login100-form-btn">
+			<div class="wrap-login100-form-btn">
+				<div class="login100-form-bgbtn"></div>
+				<button class="login100-form-btn">
+					Submit
+				</button>
+			</div>
+		</div>
+
+		<div class="feedback">
+			<span class="txt1">
+			{{if ne .Result_1 0}}
+				Incorrect flag!
+			{{else}}
+				Enter flag
+			{{end}}
+			</span>
+		</div>
+	</form>
+</div>
+</div>
+
+<!--===============================================================================================-->
+	<script src="/assets/index/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/assets/index/js/main.js"></script>
+
+
 </body>
 </html>

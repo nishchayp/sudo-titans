@@ -3,7 +3,7 @@ package app
 import (
 	"github.com/julienschmidt/httprouter"
 	"html/template"
-	// "log"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -65,6 +65,19 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 		}
 
+	}
+}
+
+func Home(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+
+	if IsLoggedIn(w, r) != true {
+
+		t := template.Must(template.ParseFiles("template/error.html"))
+		t.Execute(w, "User not logged in")
+
+	} else {
+		t := template.Must(template.ParseFiles("template/home.html"))
+		t.Execute(w, nil)
 	}
 }
 
@@ -291,6 +304,30 @@ func CheckFlagMcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 	}
 }
 
+func Ctf(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+
+	if IsLoggedIn(w, r) != true {
+
+		t := template.Must(template.ParseFiles("template/error.html"))
+		t.Execute(w, "User not logged in")
+
+	} else {
+
+		idx := strings.Replace(ps.ByName("idx"), "MCQ_", "", -1)
+
+		var ctfDetail CtfDetail
+
+		if DB.db.Where("question_id = ?", "CTF_"+idx).First(&ctfDetail).RecordNotFound() {
+			t := template.Must(template.ParseFiles("template/error.html"))
+			t.Execute(w, "QuestionId does not exist")
+		} else {
+			DB.db.Where("question_id = ?", "CTF_"+idx).First(&ctfDetail)
+			t := template.Must(template.ParseFiles("template/finalCtf.html"))
+			t.Execute(w, ctfDetail)
+		}
+	}
+}
+
 func CheckFlagCtf(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	if IsLoggedIn(w, r) != true {
@@ -324,6 +361,7 @@ func CheckFlagCtf(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 				Question    string
 				Hint        string
 				Result      int
+				Message     string
 			}
 			data := Data{
 				CtfDetailID: ctfDetail.CtfDetailID,
@@ -336,15 +374,50 @@ func CheckFlagCtf(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 
 			DB.db.Where("question_id = ?", ps.ByName("question_id")).First(&flag)
 
+			// func EditScoreCtf
+			// return values
+			//  1-->Correct
+			//  0-->Already answered
+			// -1-->Wrong
+			// -2-->Not accesible
+
 			if formData == flag.Flag {
-				EditScoreCtf(true, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
-				t := template.Must(template.ParseFiles("template/scoreBoard.html"))
-				t.Execute(w, "Correct answer!")
+				data.Result = EditScoreCtf(true, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
 			} else {
-				data.Result = -1
-				EditScoreCtf(false, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
+				data.Result = EditScoreCtf(false, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
+			}
+
+			type DataScoreLanding struct {
+				Message  string
+				TeamName string
+			}
+
+			if data.Result == 1 {
+				data.Message = "Correct answer!"
+				dataScoreLanding := DataScoreLanding{
+					Message:  data.Message,
+					TeamName: stUserCookie.TeamName,
+				}
+				t := template.Must(template.ParseFiles("template/scoreLanding.html"))
+				t.Execute(w, dataScoreLanding)
+			} else if data.Result == 0 {
+				data.Message = "You have already answered this question correctly!"
+				dataScoreLanding := DataScoreLanding{
+					Message:  data.Message,
+					TeamName: stUserCookie.TeamName,
+				}
+				t := template.Must(template.ParseFiles("template/scoreLanding.html"))
+				t.Execute(w, dataScoreLanding)
+			} else if data.Result == -1 {
+				data.Message = "Wrong answer!"
 				t := template.Must(template.ParseFiles("template/finalCtf.html"))
 				t.Execute(w, data)
+			} else if data.Result == -2 {
+				data.Message = "Question not unlocked, answer the preliminary MCQs to unlock this question"
+				t := template.Must(template.ParseFiles("template/finalCtf.html"))
+				t.Execute(w, data)
+			} else {
+				log.Println(stUserCookie.TeamName + ": Invalid data.result value returned from EditScoreCtf")
 			}
 
 		}
@@ -358,4 +431,49 @@ func Scoreboard(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	// for _, row := range pointsAndAccess {
 	// 	log.Println(row.TeamName)
 	// }
+
+	var (
+		team_name    string
+		total_points int
+	)
+	type Data struct {
+		TeamNames   [8]string
+		TotalPoints [8]int
+	}
+	var data Data
+	rows, _ := DB.db.Debug().Table("points_and_accesses").Select("team_name, total_points").Limit(8).Order("total_points desc").Rows()
+	k := 0
+	for rows.Next() {
+		rows.Scan(&team_name, &total_points)
+		data.TeamNames[k] = team_name
+		data.TotalPoints[k] = total_points
+		k++
+	}
+
+	t := template.Must(template.ParseFiles("template/scoreboard.html"))
+	t.Execute(w, data)
+}
+
+func Scorecard(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	var pointsAndAccess PointsAndAccess
+	DB.db.Where("team_name = ?", ps.ByName("team_name")).First(&pointsAndAccess)
+
+	if DB.db.Where("team_name = ?", ps.ByName("team_name")).First(&pointsAndAccess).RecordNotFound() {
+
+		t := template.Must(template.ParseFiles("template/error.html"))
+		t.Execute(w, "Team name does not exist")
+
+	} else {
+		DB.db.Where("team_name = ?", ps.ByName("team_name")).First(&pointsAndAccess)
+		t := template.Must(template.ParseFiles("template/scorecard.html"))
+		t.Execute(w, pointsAndAccess)
+	}
+}
+
+func PresentCTFValues(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	var presentCTFValue PresentCTFValue
+	DB.db.First(&presentCTFValue)
+
+	t := template.Must(template.ParseFiles("template/presentCtfValues.html"))
+	t.Execute(w, presentCTFValue)
 }
