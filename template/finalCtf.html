@@ -2,14 +2,14 @@
 <html>
 <head>
 	<title>Sudo Titans|Final CTF</title>
-	<link rel="stylesheet" type="text/css" href="/assets/css/indexStyle.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/mcqCorrect.css">
 </head>
 <body>
 	<h3>CTF Question</h3>
 	<h4>{{ .Question }}</h4>
 	<p>{{ .Hint }}</p>
 	<a href="/ctfQuestion/{{ .QuestionID }}/ctf.html" target="_blank">Open CTF</a>
-	<div>
+	<div class="submit">
 		<form action="/submitFlag/ctf/{{ .QuestionID }}" method="post">
 		  <div class="container">
 			<label for="flag"><b>st_flag_is_</b></label>

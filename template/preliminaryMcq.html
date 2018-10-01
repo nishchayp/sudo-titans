@@ -2,46 +2,93 @@
 <html>
 <head>
 	<title>Sudo Titans|Preliminary Mcq</title>
+	<link rel="stylesheet" type="text/css" href="/assets/css/mcq.css">
 </head>
 <body>
-	<h1>hello</h1>
+	<h1 class="title">
+		<ul>
+			<li style="color: #034f84">SUDO</li>
+			<li style="color: #EEE"> Titans</li>
+		</ul>
+	</h1>
 
-	<h4>{{ .Question_1 }}</h4>
-	<ul>
-		<li>A: {{ .Option_1A }}</li>
-		<li>B: {{ .Option_1B }}</li>
-		<li>C: {{ .Option_1C }}</li>
-		<li>D: {{ .Option_1D }}</li>
-	</ul>
-	<h5>{{ .Result_1 }}</h5>
+	<div class= "mcq_holder">
+		<div class="correct_card">
+		{{else if eq Result_1 -1}}
+		<div class="incorrect_card">
+		{{else}}
+		<div class="null_card">
+		{{end}}
+			<div class = "mcq_card">
+				<h4>{{ .Question_1 }}</h4>
+				<ul>
+					<li>A: {{ .Option_1A }}</li>
+					<li>B: {{ .Option_1B }}</li>
+					<li>C: {{ .Option_1C }}</li>
+					<li>D: {{ .Option_1D }}</li>
+				</ul>
+				<h5>{{ .Result_1 }}</h5>
+			</div>
+		</div>
 
-	<h4>{{ .Question_2 }}</h4>
-	<ul>
-		<li>A: {{ .Option_2A }}</li>
-		<li>B: {{ .Option_2B }}</li>
-		<li>C: {{ .Option_2C }}</li>
-		<li>D: {{ .Option_2D }}</li>
-	</ul>
-	<h5>{{ .Result_2 }}</h5>
+		{{if eq .Result_2 1}}
+		<div class="correct_card">
+		{{else if eq Result_2 -1}}
+		<div class="incorrect_card">
+		{{else}}
+		<div class="null_card">
+		{{end}}
+			<div class ="mcq_card">
+				<h4>{{ .Question_2 }}</h4>
+				<ul>
+					<li>A: {{ .Option_2A }}</li>
+					<li>B: {{ .Option_2B }}</li>
+					<li>C: {{ .Option_2C }}</li>
+					<li>D: {{ .Option_2D }}</li>
+				</ul>
+				<h5>{{ .Result_2 }}</h5>
+			</div>
+		</div>
+
+		{{if eq .Result_3 1}}
+		<div class="correct_card">
+		{{else if eq Result_3 -1}}
+		<div class="incorrect_card">
+		{{else}}
+		<div class="null_card">
+		{{end}}
+			<div class = "mcq_card">
+				<h4>{{ .Question_3 }}</h4>
+				<ul>
+					<li>A: {{ .Option_3A }}</li>
+					<li>B: {{ .Option_3B }}</li>
+					<li>C: {{ .Option_3C }}</li>
+					<li>D: {{ .Option_3D }}</li>
+				</ul>
+				<h5>{{ .Result_3 }}</h5>
+			</div>
+		</div>
+
+		{{if eq .Result_4 1 }}
+		<div class="correct_card">
+		{{else if eq Result_4 -1 }}
+		<div class="incorrect_card">
+		{{else}}
+		<div class="null_card">
+		{{end}}
+			<div class = "mcq_card">
+				<h4>{{ .Question_4 }}</h4>
+				<ul>
+					<li>A: {{ .Option_4A }}</li>
+					<li>B: {{ .Option_4B }}</li>
+					<li>C: {{ .Option_4C }}</li>
+					<li>D: {{ .Option_4D }}</li>
+				</ul>
+				<h5>{{ .Result_4 }}</h5>
+			</div>	
+		</div>
+	</div>
 	
-	<h4>{{ .Question_3 }}</h4>
-	<ul>
-		<li>A: {{ .Option_3A }}</li>
-		<li>B: {{ .Option_3B }}</li>
-		<li>C: {{ .Option_3C }}</li>
-		<li>D: {{ .Option_3D }}</li>
-	</ul>
-	<h5>{{ .Result_3 }}</h5>
-	
-	<h4>{{ .Question_4 }}</h4>
-	<ul>
-		<li>A: {{ .Option_4A }}</li>
-		<li>B: {{ .Option_4B }}</li>
-		<li>C: {{ .Option_4C }}</li>
-		<li>D: {{ .Option_4D }}</li>
-	</ul>
-	<h5>{{ .Result_4 }}</h5>
-
 	<div>
 		<form action="/submitFlag/mcq/{{ .QuestionID }}" method="post">
 		  <div class="container">

@@ -31,7 +31,8 @@ insert into mcq_details values(
 	);
 
 -- add mcq questions
-	insert into ctf_details values(1, "CTF_1", 1, "Look beneath the surface", ""); 
+insert into ctf_details values(1, "CTF_1", 1, "Look beneath the surface", ""); 
 
 -- add flags
 insert into flags values(2, "CTF_1", "pwofyoda");
+insert into flags values(1, "MCQ_1", "abcd");
