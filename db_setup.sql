@@ -4,10 +4,18 @@
 -- create admin
 insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("admin", "adminPassword", "nish", "lennon", "160905298", "160905299");
 insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("t1", "t1Password", "nish1", "lennon1", "1609052981", "1609052991");
+insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("t2", "t2Password", "nish1", "lennon1", "1609052982", "1609052992");
+insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("t3", "t3Password", "nish1", "lennon1", "1609052983", "1609052993");
+insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("t4", "t4Password", "nish1", "lennon1", "1609052984", "1609052994");
+insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("t5", "t5Password", "nish1", "lennon1", "1609052985", "1609052995");
 insert into admins(team_name) values("admin");
 
 -- create entries in PointsAndAccess
 insert into points_and_accesses(team_name) values("t1");
+insert into points_and_accesses(team_name) values("t2");
+insert into points_and_accesses(team_name) values("t3");
+insert into points_and_accesses(team_name) values("t4");
+insert into points_and_accesses(team_name) values("t5");
 
 -- add mcq questions
 insert into mcq_details values(
