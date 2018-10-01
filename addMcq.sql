@@ -1,0 +1,23 @@
+-- insert into mcq_details(
+-- 	question_id, 
+-- 	level, 
+-- 	question_1, 
+-- 	option_1_a, option_1_b, option_1_c, option_1_d, 
+-- 	question_2, 
+-- 	option_2_a, option_2_b, option_2_c, option_2_d, 
+-- 	question_3, 
+-- 	option_3_a, option_3_b, option_3_c, option_3_d, 
+-- 	question_4, 
+-- 	option_4_a, option_4_b, option_4_c, option_4_d) 
+-- values(
+-- 	"MCQ_ ",
+-- 	1,
+-- 	"",
+-- 	"", "", "", "",
+-- 	"",
+-- 	"", "", "", "",
+-- 	"",
+-- 	"", "", "", "",
+-- 	"",
+-- 	"", "", "", ""
+-- );

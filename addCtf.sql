@@ -1,0 +1,11 @@
+-- insert into ctf_details(
+-- 	question_id, 
+-- 	level, 
+-- 	question, 
+-- 	hint) 
+-- values(
+-- 	"CTF_ ", 
+-- 	1, 
+-- 	"question", 
+-- 	"hint"
+-- );

@@ -1,0 +1,17 @@
+-- insert into users(
+-- 	team_name, 
+-- 	password, 
+-- 	name1, 
+-- 	name2, 
+-- 	reg_no1, 
+-- 	reg_no2) 
+-- values(
+-- 	"t1", 
+-- 	"t1Password", 
+-- 	"nish1", 
+-- 	"lennon1", 
+-- 	"1609052981", 
+-- 	"1609052991"
+-- );
+
+-- insert into points_and_accesses(team_name) values("t1");
