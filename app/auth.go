@@ -33,7 +33,8 @@ func ApiLogin(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var receive Receive
 	err := decoder.Decode(&receive)
 	if err != nil {
-		panic(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	// check for teamName

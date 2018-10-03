@@ -48,21 +48,8 @@ type PointsAndAccess struct {
 	CTF_8             int    `json:"CTF_8" gorm:"default:'-1'" sql:"not null"`
 	CTF_9             int    `json:"CTF_9" gorm:"default:'-1'" sql:"not null"`
 	CTF_10            int    `json:"CTF_10" gorm:"default:'-1'" sql:"not null"`
-	TotalPoints       int    `json:"total_points" gorm:"default:'0'" sql:"not null"`
+	TotalPoints       int    `json:"total_points" gorm:"default:'100'" sql:"not null"`
 }
-
-// type PointsAndAccess struct {
-// 	PointsAndAccessID uint   `json:"points_and_access_id" sql:"AUTO_INCREMENT" gorm:"primary_key"`
-// 	TeamName          string `json:"team_name" sql:"not null"`
-// 	QuestionID        string `json:"question_id" sql:"not null"`
-// 	Points            int    `json:"points" gorm:"default:'0'" sql:"not null"`
-// }
-
-// type TotalPoints struct {
-// 	TotalPointsID uint   `json:"total_points_id" sql:"AUTO_INCREMENT" gorm:"primary_key"`
-// 	TeamName      string `json:"team_name" sql:"not null"`
-// 	Points        int    `json:"points" gorm:"default:'0'" sql:"not null"`
-// }
 
 type PresentCTFValue struct {
 	PresentCTFValueID uint `json:"present_ctf_value_id" sql:"AUTO_INCREMENT" gorm:"primary_key"`

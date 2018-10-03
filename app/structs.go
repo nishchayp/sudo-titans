@@ -10,16 +10,16 @@ import (
  */
 
 const (
-	MCQEasy    = 50
-	MaxCTFEasy = 100
+	MCQEasy    = 20
+	MaxCTFEasy = 150
 	DecCTFEasy = 10
 
-	MCQMedium    = 75
-	MaxCTFMedium = 150
+	MCQMedium    = 25
+	MaxCTFMedium = 250
 	DecCTFMedium = 15
 
-	MCQHard    = 75
-	MaxCTFHard = 200
+	MCQHard    = 30
+	MaxCTFHard = 400
 	DecCTFHard = 20
 
 	DecMCQ = 10
