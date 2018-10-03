@@ -1,0 +1,10 @@
+body {
+	padding-top: 35vh;
+	display: flex;
+	justify-content: center;
+}
+
+button {
+	font-size: 5rem;
+	cursor: pointer;
+}

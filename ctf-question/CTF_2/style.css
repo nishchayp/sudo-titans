@@ -1,0 +1,26 @@
+html {
+	background-color: #414141;
+	text-align: center;
+}
+
+h1 {
+	font-size: 4rem;
+}
+
+.content {
+	text-align: left;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	color: #ffff00;
+	font-size: 1.5rem;
+}
+
+.dialouge {
+	width: 40vw;
+}
+
+img {
+	width: 25vw;
+	height: 50vh;
+}

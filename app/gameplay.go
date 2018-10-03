@@ -59,13 +59,26 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 			SetCookieHandler(stUserCookie, w)
 
-			numOfSets := [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 			t := template.Must(template.ParseFiles("template/home.html"))
-			t.Execute(w, numOfSets)
+			t.Execute(w, nil)
 
 		}
 
 	}
+}
+
+func Logout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	if IsLoggedIn(w, r) != true {
+
+		t := template.Must(template.ParseFiles("template/error.html"))
+		t.Execute(w, "User not logged in")
+
+	} else {
+		ClearCookieHandler(w)
+		http.Redirect(w, r, "/", 301)
+	}
+
 }
 
 func Home(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -79,6 +92,11 @@ func Home(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		t := template.Must(template.ParseFiles("template/home.html"))
 		t.Execute(w, nil)
 	}
+}
+
+func Rules(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	t := template.Must(template.ParseFiles("template/rules.html"))
+	t.Execute(w, nil)
 }
 
 func Mcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -253,6 +271,15 @@ func CheckFlagMcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 
 			DB.db.Where("question_id = ?", ps.ByName("question_id")).First(&flag)
 
+			if len(formData) != 4 {
+				EditScoreMcq(false, stUserCookie.TeamName, data.QuestionID, data.Level)
+
+				t := template.Must(template.ParseFiles("template/preliminaryMcq.html"))
+				t.Execute(w, data)
+				log.Println(stUserCookie.TeamName, data.QuestionID, "false", formData)
+				return
+			}
+
 			count := 0
 
 			if formData[0] == flag.Flag[0] {
@@ -289,6 +316,7 @@ func CheckFlagMcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 
 				t := template.Must(template.ParseFiles("template/preliminaryMcq.html"))
 				t.Execute(w, data)
+				log.Println(stUserCookie.TeamName, data.QuestionID, "false", formData)
 			} else {
 
 				EditScoreMcq(true, stUserCookie.TeamName, data.QuestionID, data.Level)
@@ -298,6 +326,7 @@ func CheckFlagMcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 
 				t := template.Must(template.ParseFiles("template/finalCtf.html"))
 				t.Execute(w, ctfDetail)
+				log.Println(stUserCookie.TeamName, data.QuestionID, "true", formData)
 			}
 
 		}
@@ -383,8 +412,10 @@ func CheckFlagCtf(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 
 			if formData == flag.Flag {
 				data.Result = EditScoreCtf(true, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
+				log.Println(stUserCookie.TeamName, data.QuestionID, "true", formData)
 			} else {
 				data.Result = EditScoreCtf(false, stUserCookie.TeamName, ctfDetail.QuestionID, ctfDetail.Level)
+				log.Println(stUserCookie.TeamName, data.QuestionID, "false", formData)
 			}
 
 			type DataScoreLanding struct {
@@ -441,7 +472,7 @@ func Scoreboard(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		TotalPoints [8]int
 	}
 	var data Data
-	rows, _ := DB.db.Debug().Table("points_and_accesses").Select("team_name, total_points").Limit(8).Order("total_points desc").Rows()
+	rows, _ := DB.db.Table("points_and_accesses").Select("team_name, total_points").Limit(8).Order("total_points desc").Rows()
 	k := 0
 	for rows.Next() {
 		rows.Scan(&team_name, &total_points)

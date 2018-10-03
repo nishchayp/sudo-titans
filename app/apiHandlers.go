@@ -51,7 +51,8 @@ func ApiSubmitFlag(w http.ResponseWriter, r *http.Request, _ httprouter.Params) 
 		var receive Receive
 		err := decoder.Decode(&receive)
 		if err != nil {
-			panic(err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 
 		if DB.db.Where("question_id = ?", receive.QuestionID).First(&flag).RecordNotFound() {

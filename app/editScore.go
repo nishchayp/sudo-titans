@@ -1,10 +1,6 @@
 package app
 
 import (
-	// "github.com/julienschmidt/httprouter"
-	// "html/template"
-	// "net/http"
-	"log"
 	"reflect"
 	"strings"
 )
@@ -26,7 +22,6 @@ func EditScoreMcq(isCorrect bool, teamName string, questionID string, level int)
 	var pointsAndAccess PointsAndAccess
 	DB.db.Where("team_name = ?", teamName).First(&pointsAndAccess)
 	val := getFieldPointsAndAccess(&pointsAndAccess, questionID)
-	log.Println(val)
 	if val > 0 {
 		return
 	} else {
@@ -64,7 +59,6 @@ func EditScoreCtf(isCorrect bool, teamName string, questionID string, level int)
 	var pointsAndAccess PointsAndAccess
 	DB.db.Where("team_name = ?", teamName).First(&pointsAndAccess)
 	val := getFieldPointsAndAccess(&pointsAndAccess, questionID)
-	log.Println(val)
 	if val < 0 {
 		return -2
 	} else if val > 0 {

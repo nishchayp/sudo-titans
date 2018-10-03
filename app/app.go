@@ -32,7 +32,9 @@ func Run() {
 
 	router.GET("/", Index)
 	router.POST("/login", Login)
+	router.GET("/logout", Logout)
 	router.GET("/home", Home)
+	router.GET("/rules", Rules)
 	router.GET("/mcq/:idx", Mcq)
 	router.GET("/ctf/:idx", Ctf)
 	router.POST("/submitFlag/mcq/:question_id", CheckFlagMcq)

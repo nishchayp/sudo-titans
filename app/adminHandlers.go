@@ -54,7 +54,7 @@ func SetPresentCTFValues(w http.ResponseWriter, r *http.Request, _ httprouter.Pa
 
 	var response Response
 
-	err = DB.db.Debug().Create(&initialPresentCTFValue).Error
+	err = DB.db.Create(&initialPresentCTFValue).Error
 	if err != nil {
 		log.Printf("Error initializing new user", err.Error())
 		response = Response{
@@ -103,7 +103,8 @@ func AddUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var receive Receive
 	err := decoder.Decode(&receive)
 	if err != nil {
-		panic(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	var user = User{
@@ -121,7 +122,7 @@ func AddUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		TeamName: receive.TeamName,
 	}
 
-	err = DB.db.Debug().Create(&user).Error
+	err = DB.db.Create(&user).Error
 	if err != nil {
 		log.Printf("Error creating new user", err.Error())
 		response = Response{
@@ -129,7 +130,7 @@ func AddUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 			"Error creating new user",
 		}
 	} else {
-		err = DB.db.Debug().Create(&initialPointsAndAccess).Error
+		err = DB.db.Create(&initialPointsAndAccess).Error
 		if err != nil {
 			log.Printf("Error initializing new user", err.Error())
 			response = Response{

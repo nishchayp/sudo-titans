@@ -5,42 +5,14 @@ body {
   background-color: #fcfcfc;
 }
 
-.jumbotron { 
-  padding: 30px; /* fills out the jumbotron */
-  background-color: #000;
-  color: #ededed;
-  text-align: center;
-}
-
-.jumbo-container {
-  width: 1170px; /* specify a width */
-  margin: 10px auto;  /* centers the container */
-  padding: 0 15px; /* adds some padding to the left and right*/
-  border-radius: 10px;
-}
-
-.jumbotron .jumbo-container {
-  max-width: 90vw; /* allows the jumbotron to adjust on smaller widths */
-  background-color: #111;
-  padding: 8px;
-}
-
-.jumbotron h1 { 
-  text-align: center; /* centers the heading */
-  margin: 0 auto;
-  color: #ededed;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-ul {
+.question-card ul {
 	list-style: none;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
 }
 
-ul li {
+.question-card ul li {
 	padding: 5px 20px;
 	margin-top: 15px;
 	background-color: #efefef;
@@ -106,3 +78,4 @@ ul li {
   color: #666666;
   margin: 0px;
 }
+
