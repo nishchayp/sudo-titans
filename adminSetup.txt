@@ -1,0 +1,15 @@
+1. Add admin as a team in users table
+insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("admin", "adminPassword", "Nishchay", "Harshit", "160905298", "160905299");
+
+2. Add admin team into admins table
+insert into admins(team_name) values("admin");
+
+3. Login as admin and call GET route "/api/admin/setPresentCTFValues" to set initial values of all CTF questions
+
+4. Add teams using "addTeams.sql"
+
+5. Add MCQs using "addMcq.sql"
+
+6. Add CTFs using "addCtf.sql"
+
+7. Add Flags using "addFlag.sql"

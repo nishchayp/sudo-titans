@@ -32,20 +32,24 @@ func Run() {
 
 	router.GET("/", Index)
 	router.POST("/login", Login)
+	router.GET("/home", Home)
 	router.GET("/mcq/:idx", Mcq)
+	router.GET("/ctf/:idx", Ctf)
 	router.POST("/submitFlag/mcq/:question_id", CheckFlagMcq)
 	router.POST("/submitFlag/ctf/:question_id", CheckFlagCtf)
 	router.GET("/scoreboard", Scoreboard)
+	router.GET("/scorecard/:team_name", Scorecard)
+	router.GET("/presentCtfValues", PresentCTFValues)
 
-	// router.GET("/api/", ApiIndex)
-	// router.POST("/api/login", ApiLogin)
-	// router.GET("/api/logout", ApiLogout)
+	router.GET("/api/", ApiIndex)
+	router.POST("/api/login", ApiLogin)
+	router.GET("/api/logout", ApiLogout)
 	// router.GET("/api/mcq/:idx", ApiMcq)
 	// router.POST("/api/submitFlag", ApiSubmitFlag)
 
-	// router.GET("/api/admin", AdminIndex)
-	// router.GET("/api/admin/setPresentCTFValues", SetPresentCTFValues)
-	// router.POST("/api/admin/addUser", AddUser)
+	router.GET("/api/admin", AdminIndex)
+	router.GET("/api/admin/setPresentCTFValues", SetPresentCTFValues)
+	router.POST("/api/admin/addUser", AddUser)
 
 	// router.GET("/example", Example)
 

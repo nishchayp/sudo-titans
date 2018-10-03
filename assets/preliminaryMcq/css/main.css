@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+  padding: 0px 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fcfcfc;
+}
+
+.jumbotron { 
+  padding: 30px; /* fills out the jumbotron */
+  background-color: #000;
+  color: #ededed;
+  text-align: center;
+}
+
+.jumbo-container {
+  width: 1170px; /* specify a width */
+  margin: 10px auto;  /* centers the container */
+  padding: 0 15px; /* adds some padding to the left and right*/
+  border-radius: 10px;
+}
+
+.jumbotron .jumbo-container {
+  max-width: 90vw; /* allows the jumbotron to adjust on smaller widths */
+  background-color: #111;
+  padding: 8px;
+}
+
+.jumbotron h1 { 
+  text-align: center; /* centers the heading */
+  margin: 0 auto;
+  color: #ededed;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+ul {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+ul li {
+	padding: 5px 20px;
+	margin-top: 15px;
+	background-color: #efefef;
+}
+
+.question-card {
+	max-width: 80vw;
+	margin: 5vh auto;
+	padding: 5vh 5vw;
+	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.ctf-card {
+	text-align: center;
+}
+
+.ctf-link {
+	font-size: 1.5rem;
+}
+
+.correct {
+	box-shadow: 0px 10px 25px rgba(0, 255, 0, 0.7);
+}
+
+.wrong {
+	box-shadow: 0px 10px 25px rgba(255, 0, 0, 0.7);
+}
+
+.login100-form {
+  width: 100%;
+}
+
+.wrap-login100 {
+  /*width: 390px;*/
+  width: 40vw;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 20px 55px 10px 55px;
+  margin: 10px auto;
+
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.container-flag-submit {
+	text-align: center;
+}
+
+.feedback {
+  margin-top: 10px;
+  text-align: center;
+}
+.end-message {
+  font-family: Poppins-Regular;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #666666;
+  margin: 0px;
+}

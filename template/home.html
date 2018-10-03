@@ -1,15 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Sudo Titans|Home</title>
-	<link rel="stylesheet" type="text/css" href="/assets/css/indexStyle.css">
+	<title>Sudo Titans</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/assets/home/css/main.css">
+<!--===============================================================================================-->
 </head>
 <body>
-	<h3>Home</h3>
-	<ul>
-	{{ range $value :=  . }}
-		<li><a href="/mcq/{{ $value }}"> Set {{ $value }}</a></li>
-	{{ end }}
-	</ul>
+<div class="jumbotron">
+   <div class="jumbo-container">
+      <h1>Sudo Titans</h1>
+   </div>
+   <p>Choose among the set of question grouped on the basis of difficulty. Remember the bigger the challenge the greater the reward.</p>
+</div>
+
+<div class="container">
+  
+  <div class="mycard easy">
+    <div class="content">
+      <h2>Easy</h2>
+      <h3>MCQ:+75 CTF:+150</h3>
+      <p>Are you familiar with the Basics? Prove it.</p>
+      <ul>
+        <li><a href="/mcq/1"><i class="question_num" aria-hidden="true"></i>Question 1</a></li>
+        <li><a href="/mcq/2"><i class="question_num" aria-hidden="true"></i>Question 2</a></li>
+        <li><a href="/mcq/3"><i class="question_num" aria-hidden="true"></i>Question 3</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="mycard medium">
+    <div class="content">
+      <h2>Medium</h2>
+      <h3>MCQ:+75 CTF:+150</h3>
+      <p>You say that you're not a beginner. Show us what you can can do</p>
+      <ul>
+        <li><a href="/mcq/4"><i class="question_num" aria-hidden="true"></i>Question 4</a></li>
+        <li><a href="/mcq/5"><i class="question_num" aria-hidden="true"></i>Question 5</a></li>
+        <li><a href="/mcq/6"><i class="question_num" aria-hidden="true"></i>Question 6</a></li>
+        <li><a href="/mcq/7"><i class="question_num" aria-hidden="true"></i>Question 7</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="mycard hard">
+    <div class="content">
+      <h2>Hard</h2>
+      <h3>MCQ:+75 CTF:+150</h3>
+      <p>You think you are a Pro? Lets See! It's time to bring the best you've got</p>
+      <ul>
+        <li><a href="/mcq/8"><i class="question_num" aria-hidden="true"></i>Question 8</a></li>
+        <li><a href="/mcq/9"><i class="question_num" aria-hidden="true"></i>Question 9</a></li>
+        <li><a href="/mcq/10"><i class="question_num" aria-hidden="true"></i>Question 10</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 </body>
 </html>

@@ -1,0 +1,43 @@
+.jumbotron { 
+  padding: 30px; /* fills out the jumbotron */
+  background-color: #000;
+  color: #ededed;
+  text-align: center;
+}
+
+.jumbo-container {
+  width: 1170px; /* specify a width */
+  margin: 10px auto;  /* centers the container */
+  padding: 0 15px; /* adds some padding to the left and right*/
+  border-radius: 10px;
+}
+
+.jumbotron .jumbo-container {
+  max-width: 90vw; /* allows the jumbotron to adjust on smaller widths */
+  background-color: #111;
+  padding: 8px;
+}
+
+.jumbotron h1 { 
+  text-align: center; /* centers the heading */
+  margin: 0 auto;
+  color: #ededed;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+table {
+    font-family: 'Open Sans', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
