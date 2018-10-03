@@ -1,0 +1,82 @@
+.navbar {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 0vh 3vw 3vh 3vw;
+	background-color: #000000;
+	color: #ededed;
+	margin-bottom: 20px;
+}
+
+.navbar h1 {
+	/*font-weight: lighter;*/
+	font-size: 3rem;
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+
+.navbar ul {
+	margin: 20px 0 0;
+	list-style: none;
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	font-size: 1.2rem;
+	padding-bottom: 0;
+}
+
+.navbar li a {
+	text-decoration: none;
+	color: #ededed;
+	padding: 1vh 5vw;
+	margin: 0;
+	transition-duration: 0.5s;
+	border-radius: 5px;
+	font-size: 1.2rem;
+}
+
+.navbar li a:hover {
+    background-color: #111;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.jumbotron { 
+  padding: 30px; /* fills out the jumbotron */
+  background-color: #474448;
+  color: #ededed;
+  text-align: center;
+  width: 80vw;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.jumbo-container {
+  width: 90%; /* specify a width */
+  margin: 0 auto;  /* centers the container */
+  padding: 0 15px; /* adds some padding to the left and right*/
+  border-radius: 10px;
+}
+
+.jumbotron .jumbo-container {
+  max-width: 90vw; /* allows the jumbotron to adjust on smaller widths */
+  background-color: #534b52;
+  padding: 8px;
+}
+
+.jumbotron h1 { 
+  text-align: center; /* centers the heading */
+  margin: 0 auto;
+  color: #ededed;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.jumbotron p { 
+  text-align: center;
+  color: #ededed;
+  font-size: 1rem;
+  margin-top: 5px;
+}

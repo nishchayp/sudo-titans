@@ -1,0 +1,113 @@
+/*@import url('https://fonts.googleapis.com/css?family=Open+Sans');*/
+
+body {
+  margin: 0;
+  padding: 0px 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5vh;
+}
+
+.container .mycard {
+  position: relative;
+  width: 30vw;
+  height: 65vh;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.container .easy {
+  background-image: linear-gradient(to right top, #86e51b, #76e816, #62eb14, #46ed14, #06f018);
+}
+
+.container .medium {
+  background-image: linear-gradient(to right top, #ece119, #e7e713, #e1ed0d, #daf30a, #d2f90c);
+}
+
+.container .hard {
+  background-image: linear-gradient(to right top, #e5571b, #e85717, #eb5613, #ed560d, #f05506);
+}
+
+.star {
+  font-size: 10rem;
+  color: #999;
+}
+
+.container .mycard .content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: -100%;
+  padding: 60px 20px 20px;
+  box-sizing: border-box;
+  text-align: center;
+  transition: 0.5s;
+  bottom: 0;
+}
+
+/*.container .mycard:hover .content {
+  bottom: 0;
+}*/
+
+.container .mycard:nth-child(1) .content {
+  background: linear-gradient(0deg, #195268, transparent);
+}
+
+.container .mycard:nth-child(2) .content {
+  background: linear-gradient(0deg, #513833, transparent);
+}
+
+.container .mycard:nth-child(3) .content {
+  background: linear-gradient(0deg, #352c2d, transparent);
+}
+
+.container .mycard .content h2 {
+  margin-bottom: 8px;
+  padding: 0;
+  color: #fff;
+  font-size: 22px;
+}
+
+.container .mycard .content h3 {
+  color: #ffeb3b;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.container .mycard .content p {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 14px;
+}
+
+.container .mycard .content ul {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
+
+.container .mycard .content ul li {
+  margin: 10px;
+}
+
+.container .mycard .content ul li a {
+  color: #ccc;
+  padding: 0 10px;
+  font-size: 18px;
+  transition: 0.5s;
+}
+
+.container .mycard .content ul li a:hover {
+  color: #fff;
+}

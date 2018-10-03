@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func ApiIndex(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	response := &Response{
 		true,
@@ -23,7 +23,7 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	w.Write(json)
 }
 
-func SubmitFlag(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func ApiSubmitFlag(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	if r.Method != "POST" {
 		return
@@ -51,7 +51,8 @@ func SubmitFlag(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		var receive Receive
 		err := decoder.Decode(&receive)
 		if err != nil {
-			panic(err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 
 		if DB.db.Where("question_id = ?", receive.QuestionID).First(&flag).RecordNotFound() {
@@ -94,7 +95,7 @@ func SubmitFlag(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 }
 
-func Mcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func ApiMcq(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	var response Response
 

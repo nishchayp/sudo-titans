@@ -48,7 +48,7 @@ type PointsAndAccess struct {
 	CTF_8             int    `json:"CTF_8" gorm:"default:'-1'" sql:"not null"`
 	CTF_9             int    `json:"CTF_9" gorm:"default:'-1'" sql:"not null"`
 	CTF_10            int    `json:"CTF_10" gorm:"default:'-1'" sql:"not null"`
-	TotalPoints       int    `json:"total_points" gorm:"default:'0'" sql:"not null"`
+	TotalPoints       int    `json:"total_points" gorm:"default:'100'" sql:"not null"`
 }
 
 type PresentCTFValue struct {
@@ -68,6 +68,7 @@ type PresentCTFValue struct {
 type McqDetail struct {
 	McqDetailID uint   `json:"mcq_detail" sql:"AUTO_INCREMENT" gorm:"primary_key"`
 	QuestionID  string `json:"question_id" sql:"not null;unique"`
+	Level       int    `json:"level" sql:"not null"` // 1-->Easy, 2-->Medium, 2-->Hard
 	Question_1  string `json:"question_1" sql:"type:text;not null"`
 	Option_1A   string `json:"option_1_A" sql:"not null"`
 	Option_1B   string `json:"option_1_B" sql:"not null"`
@@ -88,4 +89,12 @@ type McqDetail struct {
 	Option_4B   string `json:"option_4_B" sql:"not null"`
 	Option_4C   string `json:"option_4_C" sql:"not null"`
 	Option_4D   string `json:"option_4_D" sql:"not null"`
+}
+
+type CtfDetail struct {
+	CtfDetailID uint   `json:"ctf_detail" sql:"AUTO_INCREMENT" gorm:"primary_key"`
+	QuestionID  string `json:"question_id" sql:"not null;unique"`
+	Level       int    `json:"level" sql:"not null"` // 1-->Easy, 2-->Medium, 2-->Hard
+	Question    string `json:"question" sql:"type:text;not null"`
+	Hint        string `json:"hint" sql:"type:text"`
 }

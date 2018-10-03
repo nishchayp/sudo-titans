@@ -1,23 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Sudo Titans</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/assets/index/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/assets/index/css/main.css">
+<!--===============================================================================================-->
 </head>
 <body>
-	<h2>Sudo Titans</h2>
-	<form action="/login" method="post">
-	  <div class="container">
-		<label for="team_name"><b>Team Name</b></label>
-		<input type="text" placeholder="Enter Username" name="team_name" required>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" action="/login" method="post">
+				<span class="login100-form-title p-b-26">
+						Sudo Titans
+					</span>
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+						<input class="input100" type="text" name="team_name">
+						<span class="focus-input100" data-placeholder="Team Name"></span>
+					</div>
 
-		<label for="password"><b>Password</b></label>
-		<input type="password" placeholder="Enter Password" name="password" required>
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							SHOW
+						</span>
+						<input class="input100" type="password" name="password">
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div>
 
-		<button type="submit">Login</button>
-	  </div>
-	  <dir>
-	  	<h5>{{.}}</h5>
-	  </dir>
-	</form>
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Login
+							</button>
+						</div>
+					</div>
+
+					<div class="text-center p-t-115">
+						<span class="txt1">
+							{{if .}}
+								{{ . }}
+							{{else}}
+								Welcome to Sudo Titans
+							{{end}}
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="/assets/index/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/assets/index/js/main.js"></script>
+
 </body>
 </html>
