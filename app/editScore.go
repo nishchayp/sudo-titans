@@ -1,6 +1,7 @@
 package app
 
 import (
+	"log"
 	"reflect"
 	"strings"
 )
@@ -17,12 +18,13 @@ func getFieldPresentCTFValue(v *PresentCTFValue, field string) int {
 	return int(f.Int())
 }
 
-func EditScoreMcq(isCorrect bool, teamName string, questionID string, level int) {
+func EditScoreMcq(isCorrect bool, teamName string, questionID string, level int, decPoints int) {
 	// check if already answered
 	var pointsAndAccess PointsAndAccess
 	DB.db.Where("team_name = ?", teamName).First(&pointsAndAccess)
 	val := getFieldPointsAndAccess(&pointsAndAccess, questionID)
 	if val > 0 {
+		log.Println("Already answered MCQ Correctly")
 		return
 	} else {
 		var points int
@@ -41,7 +43,7 @@ func EditScoreMcq(isCorrect bool, teamName string, questionID string, level int)
 			DB.db.Model(&pointsAndAccess).Update(strings.Replace(strings.ToLower(questionID), "mcq", "ctf", -1), 0)
 			DB.db.Model(&pointsAndAccess).Update("total_points", pointsAndAccess.TotalPoints+points)
 		} else {
-			DB.db.Model(&pointsAndAccess).Update("total_points", pointsAndAccess.TotalPoints-DecMCQ)
+			DB.db.Model(&pointsAndAccess).Update("total_points", pointsAndAccess.TotalPoints-decPoints)
 		}
 	}
 }
@@ -82,6 +84,7 @@ func EditScoreCtf(isCorrect bool, teamName string, questionID string, level int)
 			DB.db.Model(&pointsAndAccess).Update(strings.ToLower(questionID), points)
 			DB.db.Model(&pointsAndAccess).Update("total_points", pointsAndAccess.TotalPoints+points)
 			DB.db.Model(&presentCTFValue).Update(questionID, getFieldPresentCTFValue(&presentCTFValue, questionID)-decValue)
+			log.Println("supporting log", teamName, questionID, points)
 			return 1
 		} else {
 			return -1

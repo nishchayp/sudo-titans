@@ -1,5 +1,5 @@
 1. Add admin as a team in users table
-insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("admin", "adminPassword", "Nishchay", "Harshit", "160905298", "160905299");
+insert into users(team_name, password, name1, name2, reg_no1, reg_no2) values("admin", "adminPassword", "Nishchay", "Harshit", "160905298", "160953254");
 
 2. Add admin team into admins table
 insert into admins(team_name) values("admin");

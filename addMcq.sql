@@ -133,6 +133,7 @@ values(
 	"Why would HTTP Tunneling be used?",
 	"To identify proxy servers", "Web activity is not scanned", "To bypass a firewall", "HTTP is a easy protocol to work with"
 );
+
 insert into mcq_details(
 	question_id, 
 	level, 
@@ -160,6 +161,7 @@ values(
 	"Which of the following is not a component used in SSL?",
 	"SSL Recorded Protocol", "Handshake protocol", "Change Cipher Spec", "Encoding algorithms"
 );
+
 insert into mcq_details(
 	question_id, 
 	level, 
@@ -184,9 +186,10 @@ values(
 	"A sender is employing public key cryptography to send a secret message to a receiver. Which one of the following statements is TRUE?",
 	"Sender encrypts using receiver’s public key", "Sender encrypts using his own public key", "Receiver decrypts using sender’s public key", "Receiver decrypts using his own public key",
 	
-	"Exponentiation is a heavily used operation in public key cryptography. Which of the following options is the tightest upper bound on the number of multiplications required to compute bn mod m,0≤b,n≤m ?",
-	"O(logn)", "O(√n)", "O(n/logn)", "O(n)"
+	"Exponentiation is a heavily used operation in public key cryptography. Which of the following options is the tightest upper bound on the number of multiplications required to compute bn mod m,0<=b,n<=m ?",
+	"O(logn)", "O(sqrt(n))", "O(n/logn)", "O(n)"
 );
+
 insert into mcq_details(
 	question_id, 
 	level, 
@@ -221,6 +224,7 @@ How many of the above statements are true?
 	Cipher Text 1234",
 	"HLLEO YM AEDRZ", "EHOLL ZYM RAED", "ELHL MDOY AZER", "ELHL DOMY ZAER"
 );
+
 insert into mcq_details(
 	question_id, 
 	level, 
@@ -248,6 +252,7 @@ values(
 	"I bank online. Which of the following are application-level encryption protocols that I would most likely use to securely bank online?",
 	"SSL and SET", "Verisign and SHA1", "READY, SET, and GO", "PGP, PEM, and SSL"
 );
+
 insert into mcq_details(
 	question_id, 
 	level, 
@@ -274,9 +279,9 @@ values(
 I.  M’= Me mod n
     M = (M’)d mod n 
 
-II.  ed ≡ 1 mod n 
+II.  ed is equivalent to 1 mod n 
 
-III. ed ≡ 1 mod f(n)
+III. ed is equivalent to 1 mod f(n)
 
 IV. M’= Me mod f(n)
     M = (M’)d mod f(n) ",
@@ -285,6 +290,7 @@ IV. M’= Me mod f(n)
 	"Which database is queried by Whois?",
 	"ICANN", "ARIN", "APNIC", "DNS"
 );
+
 insert into mcq_details(
 	question_id, 
 	level, 

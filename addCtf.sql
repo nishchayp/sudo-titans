@@ -78,7 +78,7 @@ insert into ctf_details(
 values(
 	"CTF_6", 
 	2, 
-	"Substitute", 
+	"Make Sense", 
 	"Nothing is permanent. Everything can be substituted. Even you. Or maybe just this text."
 );
 
@@ -114,7 +114,7 @@ insert into ctf_details(
 values(
 	"CTF_9", 
 	3, 
-	"Shark walking on wire",
+	"Shark walking on a wire",
 	"I was sniffing some web traffic for a while, I think i finally got something interesting. Help me find flag through all these packets."
 );
 
@@ -126,6 +126,6 @@ insert into ctf_details(
 values(
 	"CTF_10", 
 	3, 
-	"Modern Art",
-	"Here's a rendition of some modern digital abstract art. Is it more than art though?"
+	"Help us sir!",
+	"Help! One of our machines has been compromised! We have a memory dump. Find the suspicious process. The machine was running Windows XP service pack 2. File locaton SudoTitans/CTF_10/"
 );
