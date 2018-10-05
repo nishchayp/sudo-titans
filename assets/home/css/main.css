@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0px 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -84,7 +84,7 @@ body {
   margin: 0;
   padding: 0;
   color: #fff;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .container .mycard .content ul {

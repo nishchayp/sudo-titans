@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0px 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: #fcfcfc;
 }
 
@@ -16,6 +16,14 @@ body {
 	padding: 5px 20px;
 	margin-top: 15px;
 	background-color: #efefef;
+}
+
+.question-card > p {
+	font-size: 20px;
+}
+
+.question-card > h4 {
+	font-size: 24px;
 }
 
 .question-card {
@@ -73,9 +81,16 @@ body {
 }
 .end-message {
   font-family: Poppins-Regular;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.7;
   color: #666666;
   margin: 0px;
 }
 
+.end-message > a {
+  font-family: Poppins-Regular;
+  font-size: 20px;
+  line-height: 1.7;
+  color: #666666;
+  margin: 0px;
+}

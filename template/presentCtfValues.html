@@ -6,9 +6,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/assets/scoreboard/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/assets/index/css/util.css">
+  <link rel="stylesheet" type="text/css" href="/assets/index/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/assets/all/css/main.css">
 <!--===============================================================================================-->
 </head>
 <body>
+
+<section class="navbar">
+  <div>
+    <h1>Sudo Titans</h1>
+  </div>
+  <ul>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/rules">Rules</a></li>
+    <li><a href="/scoreboard">Score Board</a></li>
+    <li><a href="/presentCtfValues">Current CTF values</a></li>
+    <li><a href="/logout">Logout</a></li>
+  </ul>    
+</section>
+
 <div class="jumbotron">
    <div class="jumbo-container">
       <h1>Sudo Titans</h1>
@@ -17,56 +34,58 @@
    <p>The value of CTF questions change dynamically based on the number of teams that have answered the question correctly.</p>
    <p>Achieve. Analyze. Repeat</p>
 </div>
+<div style="margin: 50px">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Question</th>
+        <th scope="col">Present Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CTF 1</td>
+        <td>{{.CTF_1}}</td>
+      </tr>
+      <tr>
+        <td>CTF 2</td>
+        <td>{{.CTF_2}}</td>
+      </tr>
+      <tr>
+        <td>CTF 3</td>
+        <td>{{.CTF_3}}</td>
+      </tr>
+      <tr>
+        <td>CTF 4</td>
+        <td>{{.CTF_4}}</td>
+      </tr>
+      <tr>
+        <td>CTF 5</td>
+        <td>{{.CTF_5}}</td>
+      </tr>
+      <tr>
+        <td>CTF 6</td>
+        <td>{{.CTF_6}}</td>
+      </tr>
+      <tr>
+        <td>CTF 7</td>
+        <td>{{.CTF_7}}</td>
+      </tr>
+      <tr>
+        <td>CTF 8</td>
+        <td>{{.CTF_8}}</td>
+      </tr>
+      <tr>
+        <td>CTF 9</td>
+        <td>{{.CTF_9}}</td>
+      </tr>
+      <tr>
+        <td>CTF 10</td>
+        <td>{{.CTF_10}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Question</th>
-      <th scope="col">Present Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>CTF 1</td>
-      <td>{{.CTF_1}}</td>
-    </tr>
-    <tr>
-      <td>CTF 2</td>
-      <td>{{.CTF_2}}</td>
-    </tr>
-    <tr>
-      <td>CTF 3</td>
-      <td>{{.CTF_3}}</td>
-    </tr>
-    <tr>
-      <td>CTF 4</td>
-      <td>{{.CTF_4}}</td>
-    </tr>
-    <tr>
-      <td>CTF 5</td>
-      <td>{{.CTF_5}}</td>
-    </tr>
-    <tr>
-      <td>CTF 6</td>
-      <td>{{.CTF_6}}</td>
-    </tr>
-    <tr>
-      <td>CTF 7</td>
-      <td>{{.CTF_7}}</td>
-    </tr>
-    <tr>
-      <td>CTF 8</td>
-      <td>{{.CTF_8}}</td>
-    </tr>
-    <tr>
-      <td>CTF 9</td>
-      <td>{{.CTF_9}}</td>
-    </tr>
-    <tr>
-      <td>CTF 10</td>
-      <td>{{.CTF_10}}</td>
-    </tr>
-  </tbody>
-</table>
 </body>
 </html>

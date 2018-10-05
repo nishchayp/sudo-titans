@@ -83,7 +83,7 @@ insert into flags(
 	flag) 
 values( 
 	"CTF_10", 
-	"wow_fast"
+	"wtf_who_names_keyloggers_like_this"
 );
 
 

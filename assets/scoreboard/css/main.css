@@ -1,3 +1,28 @@
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../../fonts/Roboto-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../../fonts/Roboto-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../../fonts/Roboto-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('../../fonts/Roboto-Medium.ttf'); 
+}
+
+body, html {
+  height: 100%;
+  font-family: Poppins-Regular, sans-serif;
+}
+
 .jumbotron { 
   padding: 30px; /* fills out the jumbotron */
   background-color: #000;
@@ -27,7 +52,7 @@
 }
 
 table {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
@@ -40,4 +65,11 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+.rules ul, li {
+  margin: 10px;
+  font-size: 20px;
+
+  /*list-style-type: circle;*/
 }

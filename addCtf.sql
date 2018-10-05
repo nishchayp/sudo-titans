@@ -43,7 +43,7 @@ values(
 	"CTF_3", 
 	1, 
 	"Look deeper", 
-	"There is more than that meets the eye. The state of what you see may just be a lie and the real truth may lie in the somewhere else. PS: Totally unrelated information EXIF stands for Exchangeable Image File Format"
+	"There is more than that meets the eye. The state of what you see may just be a lie and the real truth may lie somewhere else. PS: Totally unrelated information EXIF stands for Exchangeable Image File Format"
 );
 
 insert into ctf_details(
@@ -67,7 +67,7 @@ values(
 	"CTF_5", 
 	2, 
 	"Prisoner of war", 
-	"What you see is not always what you get. Sometimes you have to look pass the obvious because things may not be what the world thinks they are."
+	"What you see is not always what you get. Sometimes you have to look past the obvious because things may not be what the world thinks they are."
 );
 
 insert into ctf_details(

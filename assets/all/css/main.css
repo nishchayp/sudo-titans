@@ -11,7 +11,7 @@
 
 .navbar h1 {
 	/*font-weight: lighter;*/
-	font-size: 3rem;
+	font-size: 4rem;
 	margin-top: 20px;
 	margin-bottom: 5px;
 }
@@ -30,7 +30,7 @@
 .navbar li a {
 	text-decoration: none;
 	color: #ededed;
-	padding: 1vh 5vw;
+	padding: 1vh 2vw;
 	margin: 0;
 	transition-duration: 0.5s;
 	border-radius: 5px;
